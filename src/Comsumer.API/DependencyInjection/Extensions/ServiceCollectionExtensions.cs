@@ -2,6 +2,8 @@
 using Comsumer.API.MessageBus.Consumers.Events;
 using MassTransit;
 using System.Reflection;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Comsumer.API.DependencyInjection.Extensions
 {

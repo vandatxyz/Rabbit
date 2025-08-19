@@ -1,7 +1,24 @@
 using Api.DependencyInjection.Extensions;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configure database context
+builder.Services.AddDbContext<ApplicationContext>(options =>
+          options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+                                o => o.MigrationsAssembly("Data")));
+
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy",
+buiders =>
+{
+    buiders
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials()
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .WithOrigins("http://localhost:4200", "https://localhost:4200");
+}));
 // Add services to the container.
 
 builder.Services.AddControllers();

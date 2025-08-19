@@ -1,5 +1,7 @@
 ﻿using Api.DependencyInjection.Options;
 using MassTransit;
+using Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Api.DependencyInjection.Extensions
 {
@@ -9,9 +11,17 @@ namespace Api.DependencyInjection.Extensions
         {
             var masstransitConfiguration = new MasstransitConfiguration();
             configuration.GetSection(nameof(MasstransitConfiguration)).Bind(masstransitConfiguration);
-
+           
             services.AddMassTransit(mt =>
             {
+                mt.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("api", false));
+
+                mt.AddEntityFrameworkOutbox<ApplicationContext>(o =>
+                {
+                    o.QueryDelay = TimeSpan.FromSeconds(5);
+                    o.UseSqlServer();
+                    o.UseBusOutbox();
+                });
                 mt.UsingRabbitMq((context, bus)=>
                 {
                     bus.Host(

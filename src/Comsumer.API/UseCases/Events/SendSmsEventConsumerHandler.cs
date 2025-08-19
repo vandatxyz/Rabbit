@@ -16,6 +16,7 @@ namespace Comsumer.API.UseCases.Events
         public async Task Handle(DomainEvent.SmsNotificationEvent request, CancellationToken cancellationToken)
         {
            _logger.LogInformation("SMS Notification Event Received: {@SmsNotificationEvent}", request);
+            await Task.CompletedTask;
         }
     }
 }
