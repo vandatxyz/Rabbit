@@ -14,8 +14,6 @@ namespace Api.DependencyInjection.Extensions
            
             services.AddMassTransit(mt =>
             {
-                mt.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("api", false));
-
                 mt.AddEntityFrameworkOutbox<ApplicationContext>(o =>
                 {
                     o.QueryDelay = TimeSpan.FromSeconds(5);

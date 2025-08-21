@@ -10,5 +10,7 @@
         public string? ExchangeType { get; set; }
         public string? SmsQueueName { get; set; }
         public string? EmailQueueName { get; set; }
+        public string? RetryCount { get; set; }
+        public string? Interval { get; set; }
     }
 }

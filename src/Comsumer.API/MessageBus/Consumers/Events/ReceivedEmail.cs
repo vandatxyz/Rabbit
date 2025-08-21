@@ -4,7 +4,7 @@ using Producers.API.Abtractions.Messages;
 
 namespace Comsumer.API.MessageBus.Consumers.Events
 {
-    public class SendEmailWhenReceivedEmailEventComsumer(ISender sender) : Consumer<DomainEvent.EmailNotificationEvent>(sender)
+    public class ReceivedEmail(ISender sender) : Consumer<DomainEvent.EmailNotificationEvent>(sender)
     {
     }
 }
